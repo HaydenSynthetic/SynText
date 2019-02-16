@@ -32,15 +32,11 @@ namespace TextEdit
                 }
 
                 filePath = newFile;
-
-
-
                 fileOpened = true;
             }
             formName.Text = string.Format("Text Editor - {0}", filePath);
 
         }
-
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -105,6 +101,7 @@ namespace TextEdit
                     fs.Write(info, 0, info.Length);
 
                     fs.Close();
+                    formName.Text = string.Format("Text Editor - {0}", filePath);
                     isExitSafe = true;
                 }
             }
@@ -115,9 +112,7 @@ namespace TextEdit
         {
             Application.Exit();
         }
-
-
-
+        
         private void textBox_TextChanged(object sender, EventArgs e)
         {
             isExitSafe = false; // Prevents application closing if file has been edited without saving
@@ -169,5 +164,13 @@ namespace TextEdit
             mouseDown = false;
         }
         #endregion
+
+        private void fontToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (fontDialog.ShowDialog() == DialogResult.OK)
+            {
+                textBox.Font = fontDialog.Font;
+            }
+        }
     }
 }
