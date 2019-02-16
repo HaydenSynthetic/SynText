@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
 
 namespace TextEdit
 {
@@ -16,8 +12,7 @@ namespace TextEdit
         static void Main(string[] args)
         {
             string newFile = "";
-
-            if (args.Length != 0)
+            if (args.Length != 0) // if application is opened with external file
             {
                 newFile = args[0];
             }

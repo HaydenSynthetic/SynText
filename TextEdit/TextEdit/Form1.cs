@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.IO;
@@ -19,8 +14,9 @@ namespace TextEdit
         Point lastLocation;
         string filePath;
         bool fileOpened;
+        bool isExitSafe;
 
-        public Form1(string newFile)
+        public Form1(string newFile) // On form startup
         {
             InitializeComponent();
 
@@ -41,16 +37,7 @@ namespace TextEdit
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Application.Exit();
-        }
-
-
-
-
-
-        private void window_MouseUp(object sender, MouseEventArgs e)
-        {
-            mouseDown = false;
+            QuitApplication();
         }
 
         private void openFile_Click(object sender, EventArgs e) // On CTRL + O
@@ -98,7 +85,10 @@ namespace TextEdit
             }
         }
 
-        
+        private void QuitApplication()
+        {
+            Application.Exit();
+        }
 
         #region Window Drag
         private void window_MouseDown(object sender, MouseEventArgs e)
@@ -116,6 +106,11 @@ namespace TextEdit
 
                 this.Update();
             }
+        }
+
+        private void window_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
         }
         #endregion
 
