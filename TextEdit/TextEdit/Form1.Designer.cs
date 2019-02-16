@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabBar = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.formName = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox = new System.Windows.Forms.TextBox();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
@@ -40,6 +41,7 @@
             this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabBar.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -47,7 +49,7 @@
             // tabBar
             // 
             this.tabBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(59)))), ((int)(((byte)(55)))));
-            this.tabBar.Controls.Add(this.label1);
+            this.tabBar.Controls.Add(this.formName);
             this.tabBar.Controls.Add(this.button1);
             this.tabBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.tabBar.Location = new System.Drawing.Point(0, 0);
@@ -58,16 +60,16 @@
             this.tabBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.window_MouseMove);
             this.tabBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.window_MouseUp);
             // 
-            // label1
+            // formName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(8, 6);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 16);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Text Editor";
+            this.formName.AutoSize = true;
+            this.formName.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.formName.ForeColor = System.Drawing.Color.White;
+            this.formName.Location = new System.Drawing.Point(8, 6);
+            this.formName.Name = "formName";
+            this.formName.Size = new System.Drawing.Size(68, 16);
+            this.formName.TabIndex = 2;
+            this.formName.Text = "Text Editor";
             // 
             // button1
             // 
@@ -98,6 +100,7 @@
             this.textBox.Name = "textBox";
             this.textBox.Size = new System.Drawing.Size(1051, 589);
             this.textBox.TabIndex = 1;
+            this.textBox.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
             // menuStrip
             // 
@@ -118,7 +121,8 @@
             this.fileMenuStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.fileMenuStrip.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openFile,
-            this.saveFile});
+            this.saveFile,
+            this.saveAsToolStripMenuItem});
             this.fileMenuStrip.ForeColor = System.Drawing.Color.White;
             this.fileMenuStrip.Name = "fileMenuStrip";
             this.fileMenuStrip.Size = new System.Drawing.Size(37, 20);
@@ -130,7 +134,7 @@
             this.openFile.ForeColor = System.Drawing.Color.White;
             this.openFile.Name = "openFile";
             this.openFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openFile.Size = new System.Drawing.Size(180, 22);
+            this.openFile.Size = new System.Drawing.Size(195, 22);
             this.openFile.Text = "Open";
             this.openFile.Click += new System.EventHandler(this.openFile_Click);
             // 
@@ -140,7 +144,7 @@
             this.saveFile.ForeColor = System.Drawing.Color.White;
             this.saveFile.Name = "saveFile";
             this.saveFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveFile.Size = new System.Drawing.Size(180, 22);
+            this.saveFile.Size = new System.Drawing.Size(195, 22);
             this.saveFile.Text = "Save";
             this.saveFile.Click += new System.EventHandler(this.saveFile_Click);
             // 
@@ -172,6 +176,17 @@
             this.openFileDialog.Filter = "Text File|*.txt";
             this.openFileDialog.Title = "Open File";
             // 
+            // saveAsToolStripMenuItem
+            // 
+            this.saveAsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(59)))), ((int)(((byte)(55)))));
+            this.saveAsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.saveAsToolStripMenuItem.Text = "Save As...";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -182,6 +197,7 @@
             this.Controls.Add(this.textBox);
             this.Controls.Add(this.tabBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.Name = "Form1";
             this.Text = "Form1";
@@ -199,7 +215,7 @@
         private System.Windows.Forms.Panel tabBar;
         private System.Windows.Forms.TextBox textBox;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label formName;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem openFile;
@@ -208,6 +224,7 @@
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fontToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
     }
 }
 
