@@ -20,15 +20,24 @@ namespace TextEdit
         string filePath;
         bool fileOpened;
 
-        public Form1()
+        public Form1(string newFile)
         {
             InitializeComponent();
+
+            if (newFile != "") // If app is opened with a text file
+            {
+                Debug.WriteLine("File opened on startup");
+
+                var fileStream = newFile;
+
+                using (StreamReader reader = new StreamReader(fileStream))
+                {
+                    textBox.Text = reader.ReadToEnd();
+                }
+                fileOpened = true;
+            }
         }
 
-        private void textBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -38,29 +47,13 @@ namespace TextEdit
 
 
 
-        private void window_MouseDown(object sender, MouseEventArgs e)
-        {
-            mouseDown = true;
-            lastLocation = e.Location;
-        }
-
-        private void window_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (mouseDown)
-            {
-                this.Location = new Point(
-                    (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
-
-                this.Update();
-            }
-        }
 
         private void window_MouseUp(object sender, MouseEventArgs e)
         {
             mouseDown = false;
         }
 
-        private void openFile_Click(object sender, EventArgs e)
+        private void openFile_Click(object sender, EventArgs e) // On CTRL + O
         {
             Debug.WriteLine("Open file");
 
@@ -81,7 +74,7 @@ namespace TextEdit
 
         }
 
-        private void saveFile_Click(object sender, EventArgs e)
+        private void saveFile_Click(object sender, EventArgs e) // On CTRL + S
         {
             Debug.WriteLine("Save file");
             
@@ -104,5 +97,27 @@ namespace TextEdit
                 fs.Close();
             }
         }
+
+        
+
+        #region Window Drag
+        private void window_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+            lastLocation = e.Location;
+        }
+
+        private void window_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseDown)
+            {
+                this.Location = new Point(
+                    (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
+
+                this.Update();
+            }
+        }
+        #endregion
+
     }
 }
