@@ -19,7 +19,7 @@ namespace TextEdit
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1(newFile));
+            Application.Run(new form(newFile));
         }
     }
 }

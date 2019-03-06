@@ -7,7 +7,7 @@ using System.IO;
 
 namespace TextEdit
 {
-    public partial class Form1 : Form
+    public partial class form : Form
     {
 
         bool mouseDown = false;
@@ -15,11 +15,23 @@ namespace TextEdit
         string filePath;
         bool fileOpened = false;
         bool isExitSafe = true;
+        private const int WM_NCHITTEST = 0x84;
+        private const int HTCLIENT = 0x1;
+        private const int HTCAPTION = 0x2;
 
-        public Form1(string newFile) // On form startup
+        ///
+        /// Handling the window messages
+        ///
+        protected override void WndProc(ref Message message)
+        {
+            base.WndProc(ref message);
+
+            if (message.Msg == WM_NCHITTEST && (int)message.Result == HTCLIENT)
+                message.Result = (IntPtr)HTCAPTION;
+        }
+        public form(string newFile) // On form startup
         {
             InitializeComponent();
-
             if (newFile != "") // If app is opened with a text file
             {
                 Debug.WriteLine("File opened on startup");
@@ -34,7 +46,7 @@ namespace TextEdit
                 filePath = newFile;
                 fileOpened = true;
             }
-            formName.Text = string.Format("Text Editor - {0}", filePath);
+            formName.Text = string.Format("Text Editor  {0}", filePath);
 
         }
 
@@ -60,6 +72,8 @@ namespace TextEdit
                     textBox.Text = reader.ReadToEnd();
                 }
                 fileOpened = true;
+                formName.Text = string.Format("Text Editor  {0}", filePath);
+
             }
 
         }
@@ -105,14 +119,14 @@ namespace TextEdit
                     isExitSafe = true;
                 }
             }
-            
+
         }
 
         private void QuitApplication()
         {
             Application.Exit();
         }
-        
+
         private void textBox_TextChanged(object sender, EventArgs e)
         {
             isExitSafe = false; // Prevents application closing if file has been edited without saving
@@ -154,6 +168,7 @@ namespace TextEdit
             {
                 this.Location = new Point(
                     (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
+                this.WindowState = FormWindowState.Normal;
 
                 this.Update();
             }
@@ -172,5 +187,29 @@ namespace TextEdit
                 textBox.Font = fontDialog.Font;
             }
         }
+
+        private void Minimize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void toggleFullScreen_Click(object sender, EventArgs e)
+        {
+            if (WindowState != FormWindowState.Maximized)
+                this.WindowState = FormWindowState.Maximized;
+            else
+                this.WindowState = FormWindowState.Normal;
+
+        }
+
+
+        private void backgroundToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                textBox.BackColor = colorDialog.Color;
+            }
+        }
+
     }
 }
