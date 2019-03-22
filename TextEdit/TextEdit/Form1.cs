@@ -52,7 +52,61 @@ namespace TextEdit
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (isExitSafe)
             QuitApplication();
+            else
+            {
+                DialogResult saveError = MessageBox.Show("This file has been edited, and has not been saved. Would you like to save your work before closing?", "Warning", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                if (saveError == DialogResult.Yes)
+                {
+                    Debug.WriteLine("Save file");
+                    if (!fileOpened)
+                    {
+                        if (string.IsNullOrEmpty(filePath))
+                            saveFileDialog.FileName = filePath;
+
+                        saveFileDialog.ShowDialog();
+
+                        // If the file name is not an empty string open it for saving.  
+                        if (saveFileDialog.FileName != "")
+                        {
+                            // Saves the Image via a FileStream created by the OpenFile method.  
+                            FileStream fs =
+                               (FileStream)saveFileDialog.OpenFile();
+
+
+                            byte[] info = new UTF8Encoding(true).GetBytes(textBox.Text);
+                            fs.Write(info, 0, info.Length);
+
+                            fs.Close();
+                            isExitSafe = true;
+                            QuitApplication();
+
+                        }
+                    }
+
+                    else if (fileOpened && File.Exists(filePath)) //if user has file opened in program
+                    {
+                        using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Write))
+                        {
+
+                            fs.SetLength(0);
+
+                            byte[] info = new UTF8Encoding(true).GetBytes(textBox.Text);
+                            fs.Write(info, 0, info.Length);
+
+                            fs.Close();
+                            formName.Text = string.Format("Text Editor - {0}", filePath);
+                            isExitSafe = true;
+                            QuitApplication();
+                        }
+                    }
+                }
+                else if (saveError == DialogResult.No)
+                {
+                    QuitApplication();
+                }
+            }
         }
 
         private void openFile_Click(object sender, EventArgs e) // On CTRL + O
