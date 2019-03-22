@@ -139,8 +139,10 @@
             this.textBox.ForeColor = System.Drawing.Color.White;
             this.textBox.Location = new System.Drawing.Point(0, 54);
             this.textBox.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            this.textBox.MaxLength = 2000000000;
             this.textBox.Multiline = true;
             this.textBox.Name = "textBox";
+            this.textBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox.Size = new System.Drawing.Size(943, 509);
             this.textBox.TabIndex = 1;
             this.textBox.TextChanged += new System.EventHandler(this.textBox_TextChanged);
