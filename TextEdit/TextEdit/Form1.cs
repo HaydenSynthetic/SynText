@@ -130,6 +130,7 @@ namespace TextEdit
         private void textBox_TextChanged(object sender, EventArgs e)
         {
             isExitSafe = false; // Prevents application closing if file has been edited without saving
+            textBox.Text = textBox.Text.Replace("!!TIMESTAMP!!", DateTime.Now.ToString());
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
