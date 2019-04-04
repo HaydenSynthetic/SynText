@@ -9,7 +9,7 @@ namespace TextEdit
 {
     public partial class form : Form
     {
-
+        string temp;
         bool mouseDown = false;
         Point lastLocation;
         string filePath;
@@ -45,6 +45,8 @@ namespace TextEdit
 
                 filePath = newFile;
                 fileOpened = true;
+                isExitSafe = true;
+                temp = textBox.Text;
             }
             formName.Text = string.Format("Text Editor  {0}", filePath);
 
@@ -155,6 +157,7 @@ namespace TextEdit
 
                     fs.Close();
                     isExitSafe = true;
+                    temp = textBox.Text;
                 }
             }
 
@@ -181,11 +184,6 @@ namespace TextEdit
             Application.Exit();
         }
 
-        private void textBox_TextChanged(object sender, EventArgs e)
-        {
-            isExitSafe = false; // Prevents application closing if file has been edited without saving
-            textBox.Text = textBox.Text.Replace("!!TIMESTAMP!!", DateTime.Now.ToString());
-        }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -265,6 +263,18 @@ namespace TextEdit
                 textBox.BackColor = colorDialog.Color;
             }
         }
+        private void timeStampToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            textBox.Text += $"!!TIMESTAMP!!";
+        }
 
+        private void textBox_TextChanged(object sender, EventArgs e)
+        {
+            if (temp != textBox.Text)
+                isExitSafe = false; // Prevents application closing if file has been edited without saving
+            else
+                isExitSafe = true;
+            textBox.Text = textBox.Text.Replace("!!TIMESTAMP!!", $"--- {DateTime.Now.ToString()} ---{Environment.NewLine}");
+        }
     }
 }

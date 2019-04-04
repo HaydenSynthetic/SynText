@@ -34,7 +34,6 @@
             this.toggleFullScreen = new System.Windows.Forms.Button();
             this.formName = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox = new System.Windows.Forms.TextBox();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileMenuStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.openFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,11 +42,14 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timeStampToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.panel1 = new System.Windows.Forms.Panel();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.textBox = new System.Windows.Forms.TextBox();
             this.tabBar.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -130,30 +132,14 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // textBox
-            // 
-            this.textBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(53)))), ((int)(((byte)(56)))));
-            this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox.ForeColor = System.Drawing.Color.White;
-            this.textBox.Location = new System.Drawing.Point(0, 54);
-            this.textBox.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
-            this.textBox.MaxLength = 2000000000;
-            this.textBox.Multiline = true;
-            this.textBox.Name = "textBox";
-            this.textBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox.Size = new System.Drawing.Size(943, 509);
-            this.textBox.TabIndex = 1;
-            this.textBox.TextChanged += new System.EventHandler(this.textBox_TextChanged);
-            // 
             // menuStrip
             // 
             this.menuStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(59)))), ((int)(((byte)(55)))));
             this.menuStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileMenuStrip,
-            this.settingsToolStripMenuItem});
+            this.settingsToolStripMenuItem,
+            this.textToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 29);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(943, 24);
@@ -235,6 +221,25 @@
             this.backgroundToolStripMenuItem.Text = "Background";
             this.backgroundToolStripMenuItem.Click += new System.EventHandler(this.backgroundToolStripMenuItem_Click);
             // 
+            // textToolStripMenuItem
+            // 
+            this.textToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.timeStampToolStripMenuItem});
+            this.textToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.textToolStripMenuItem.Name = "textToolStripMenuItem";
+            this.textToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.textToolStripMenuItem.Text = "Text";
+            // 
+            // timeStampToolStripMenuItem
+            // 
+            this.timeStampToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(59)))), ((int)(((byte)(55)))));
+            this.timeStampToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.timeStampToolStripMenuItem.Name = "timeStampToolStripMenuItem";
+            this.timeStampToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.timeStampToolStripMenuItem.Text = "Time Stamp";
+            this.timeStampToolStripMenuItem.ToolTipText = "Inserts timestamp";
+            this.timeStampToolStripMenuItem.Click += new System.EventHandler(this.timeStampToolStripMenuItem_Click);
+            // 
             // saveFileDialog
             // 
             this.saveFileDialog.FileName = "NewText";
@@ -271,6 +276,21 @@
             this.colorDialog.FullOpen = true;
             this.colorDialog.SolidColorOnly = true;
             // 
+            // textBox
+            // 
+            this.textBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(53)))), ((int)(((byte)(56)))));
+            this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox.Font = new System.Drawing.Font("Arial", 12F);
+            this.textBox.ForeColor = System.Drawing.Color.White;
+            this.textBox.Location = new System.Drawing.Point(0, 54);
+            this.textBox.MaxLength = int.MaxValue;
+            this.textBox.Multiline = true;
+            this.textBox.Name = "textBox";
+            this.textBox.Size = new System.Drawing.Size(943, 509);
+            this.textBox.TabIndex = 1;
+            this.textBox.TextChanged += new System.EventHandler(this.textBox_TextChanged);
+            // 
             // form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -301,7 +321,6 @@
         #endregion
 
         private System.Windows.Forms.Panel tabBar;
-        private System.Windows.Forms.TextBox textBox;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label formName;
         private System.Windows.Forms.MenuStrip menuStrip;
@@ -319,6 +338,9 @@
         private System.Windows.Forms.Button toggleFullScreen;
         private System.Windows.Forms.ToolStripMenuItem backgroundToolStripMenuItem;
         private System.Windows.Forms.ColorDialog colorDialog;
+        private System.Windows.Forms.ToolStripMenuItem textToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem timeStampToolStripMenuItem;
+        private System.Windows.Forms.TextBox textBox;
     }
 }
 
