@@ -111,7 +111,7 @@
             this.formName.ForeColor = System.Drawing.Color.White;
             this.formName.Location = new System.Drawing.Point(8, 6);
             this.formName.Name = "formName";
-            this.formName.Size = new System.Drawing.Size(68, 16);
+            this.formName.Size = new System.Drawing.Size(69, 16);
             this.formName.TabIndex = 2;
             this.formName.Text = "Text Editor";
             // 
@@ -235,7 +235,7 @@
             this.timeStampToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(59)))), ((int)(((byte)(55)))));
             this.timeStampToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.timeStampToolStripMenuItem.Name = "timeStampToolStripMenuItem";
-            this.timeStampToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.timeStampToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.timeStampToolStripMenuItem.Text = "Time Stamp";
             this.timeStampToolStripMenuItem.ToolTipText = "Inserts timestamp";
             this.timeStampToolStripMenuItem.Click += new System.EventHandler(this.timeStampToolStripMenuItem_Click);
@@ -284,9 +284,10 @@
             this.textBox.Font = new System.Drawing.Font("Arial", 12F);
             this.textBox.ForeColor = System.Drawing.Color.White;
             this.textBox.Location = new System.Drawing.Point(0, 54);
-            this.textBox.MaxLength = int.MaxValue;
+            this.textBox.MaxLength = 2147483647;
             this.textBox.Multiline = true;
             this.textBox.Name = "textBox";
+            this.textBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox.Size = new System.Drawing.Size(943, 509);
             this.textBox.TabIndex = 1;
             this.textBox.TextChanged += new System.EventHandler(this.textBox_TextChanged);
