@@ -44,6 +44,7 @@
             this.backgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timeStampToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.fontDialog = new System.Windows.Forms.FontDialog();
@@ -139,7 +140,8 @@
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileMenuStrip,
             this.settingsToolStripMenuItem,
-            this.textToolStripMenuItem});
+            this.textToolStripMenuItem,
+            this.runToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 29);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(943, 24);
@@ -239,6 +241,17 @@
             this.timeStampToolStripMenuItem.Text = "Time Stamp";
             this.timeStampToolStripMenuItem.ToolTipText = "Inserts timestamp";
             this.timeStampToolStripMenuItem.Click += new System.EventHandler(this.timeStampToolStripMenuItem_Click);
+            // 
+            // runToolStripMenuItem
+            // 
+            this.runToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(59)))), ((int)(((byte)(55)))));
+            this.runToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(162)))), ((int)(((byte)(208)))), ((int)(((byte)(153)))));
+            this.runToolStripMenuItem.Image = global::TextEdit.Properties.Resources.GreenNote;
+            this.runToolStripMenuItem.Name = "runToolStripMenuItem";
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.runToolStripMenuItem.Text = "Run";
+            this.runToolStripMenuItem.Visible = false;
+            this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
             // 
             // saveFileDialog
             // 
@@ -342,6 +355,7 @@
         private System.Windows.Forms.ToolStripMenuItem textToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem timeStampToolStripMenuItem;
         private System.Windows.Forms.TextBox textBox;
+        private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
     }
 }
 

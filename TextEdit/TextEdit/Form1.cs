@@ -4,6 +4,7 @@ using System.Text;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.IO;
+using System.Linq;
 
 namespace TextEdit
 {
@@ -32,6 +33,8 @@ namespace TextEdit
         public form(string newFile) // On form startup
         {
             InitializeComponent();
+            textBox.Font = Properties.Settings.Default.savedFont;
+            textBox.BackColor = Properties.Settings.Default.backColor;
             if (newFile != "") // If app is opened with a text file
             {
                 Debug.WriteLine("File opened on startup");
@@ -55,7 +58,7 @@ namespace TextEdit
         private void button1_Click(object sender, EventArgs e)
         {
             if (isExitSafe)
-            QuitApplication();
+                QuitApplication();
             else
             {
                 DialogResult saveError = MessageBox.Show("This file has been edited, and has not been saved. Would you like to save your work before closing?", "Warning", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
@@ -181,6 +184,8 @@ namespace TextEdit
 
         private void QuitApplication()
         {
+            Properties.Settings.Default.Save();
+
             Application.Exit();
         }
 
@@ -238,6 +243,7 @@ namespace TextEdit
             if (fontDialog.ShowDialog() == DialogResult.OK)
             {
                 textBox.Font = fontDialog.Font;
+                Properties.Settings.Default.savedFont = fontDialog.Font;
             }
         }
 
@@ -261,6 +267,7 @@ namespace TextEdit
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
                 textBox.BackColor = colorDialog.Color;
+                Properties.Settings.Default.backColor = colorDialog.Color;
             }
         }
         private void timeStampToolStripMenuItem_Click(object sender, EventArgs e)
@@ -276,5 +283,11 @@ namespace TextEdit
                 isExitSafe = true;
             textBox.Text = textBox.Text.Replace("!!TIMESTAMP!!", $"--- {DateTime.Now.ToString()} ---{Environment.NewLine}");
         }
+
+        private void runToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
+
