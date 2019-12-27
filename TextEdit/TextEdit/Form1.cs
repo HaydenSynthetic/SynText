@@ -14,6 +14,7 @@ namespace TextEdit
         bool mouseDown = false;
         Point lastLocation;
         string filePath;
+        string fileName = "New File";
         bool fileOpened = false;
         bool isExitSafe = true;
         private const int WM_NCHITTEST = 0x84;
@@ -30,6 +31,7 @@ namespace TextEdit
             if (message.Msg == WM_NCHITTEST && (int)message.Result == HTCLIENT)
                 message.Result = (IntPtr)HTCAPTION;
         }
+
         public form(string newFile) // On form startup
         {
             InitializeComponent();
@@ -50,9 +52,19 @@ namespace TextEdit
                 fileOpened = true;
                 isExitSafe = true;
                 temp = textBox.Text;
+            fileName = Path.GetFileName(filePath);
             }
-            formName.Text = string.Format("Text Editor  {0}", filePath);
-
+            formName.Text = string.Format("SynText | {0}", fileName);
+            RPCHandler.Awaken();
+            RPCHandler.SetPresence(new DiscordRPC.RichPresence()
+            {
+                Details = fileName,
+                Assets = new DiscordRPC.Assets()
+                {
+                    LargeImageKey = "cover",
+                    LargeImageText = "SynText",
+                }
+            });
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -101,7 +113,7 @@ namespace TextEdit
                             fs.Write(info, 0, info.Length);
 
                             fs.Close();
-                            formName.Text = string.Format("Text Editor - {0}", filePath);
+                            formName.Text = string.Format("Text Editor | {0}", fileName);
                             isExitSafe = true;
                             QuitApplication();
                         }
@@ -122,7 +134,7 @@ namespace TextEdit
             {
                 //Get the path of specified file
                 filePath = openFileDialog.FileName;
-
+                fileName = Path.GetFileName(filePath);
                 //Read the contents of the file into a stream
                 var fileStream = openFileDialog.OpenFile();
 
@@ -131,7 +143,7 @@ namespace TextEdit
                     textBox.Text = reader.ReadToEnd();
                 }
                 fileOpened = true;
-                formName.Text = string.Format("Text Editor  {0}", filePath);
+                formName.Text = string.Format("Text Editor | {0}", fileName);
 
             }
 
@@ -175,7 +187,7 @@ namespace TextEdit
                     fs.Write(info, 0, info.Length);
 
                     fs.Close();
-                    formName.Text = string.Format("Text Editor - {0}", filePath);
+                    formName.Text = string.Format("Text Editor | {0}", fileName);
                     isExitSafe = true;
                 }
             }
